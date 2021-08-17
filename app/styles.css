@@ -1,14 +1,4 @@
-.news-item{
-  background-color: red;
-}
 #news-container{
   width: 50%;
   background-color: blue;
-}
-body{
-  background-color: blue;
-}
-
-.news-item-link{
-  text-decoration: none;
 }

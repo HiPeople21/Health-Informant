@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {%block title%}Health News{%endblock%} {%block content%}
+<div id='news-container'>
+	{% for news in content['news'] %}
+	<!-- <div class='news-item'>
+    <a class="news-item-link" href={{news['link']}}>
+      <h3 class='news-title'>{{news['title']}}</h3>
+      <h4 class='news-publisher'>{{news['publisher']}}</h4>
+      <p class='news-text'>{{news['text']}}</p>
+      <p class='news-time'>{{news['time']}}</p>
+    </a>
+  </div> -->
+	<div class="card news-item">
+		<div class="news-publisher card-header">
+			{{news['publisher']}}
+		</div>
+		<div class="card-body">
+			<h5 class="card-title news-title">{{news['title']}}</h5>
+			<p class="news-text card-text">{{news['text']}}</p>
+			<a href="{{news['link']}}" class="news-item-link btn btn-primary">Visit article</a>
+		</div>
+		<div class="news-time card-footer text-muted">
+			{{news['time']}}
+		</div>
+	</div>
+	{% endfor %}
+</div>
+{%endblock%}

@@ -2,9 +2,5 @@
 {%block title%}Home{%endblock%}
 
 {%block content%}
-<div id='news-container'>
-  {% for news, link in content['news'].items() %}
-  <div class='news-item'><a class="news-item-link" href={{link}}>{{news.text}}</a></div>
-  {% endfor %}
-</div>
+
 {%endblock%}

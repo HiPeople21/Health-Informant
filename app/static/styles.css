@@ -1,0 +1,22 @@
+.news-container{
+  display: flex;
+  top: 100px;
+}
+.news-item{
+  border: 1px solid black;
+}
+.news-item-link{
+  text-decoration: none;
+  text-align: center;
+}
+.navbar-container{
+  position: fixed;
+  width: 100vw;
+  top: 0;
+}
+.content-container{
+  margin-top: 60px;
+}
+.card{
+  
+}
