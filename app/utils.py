@@ -2,14 +2,16 @@ from bs4 import BeautifulSoup
 import requests
 from typing import List, Dict
 
-def scrape_health_news() -> List[Dict[str, str]]:
+def scrape_health_news(country: str='United States of America') -> List[Dict[str, str]]:
   '''
   Returns a dict of news items; the key being the contents and the value being the link
   '''
   header: Dict[str, str] = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'}
-
-  html_text: str = requests.get('https://www.google.com/search?q=health+ireland&tbm=nws', headers=header).text
+  
+  html_text: str = requests.get(f'https://www.google.com/search?q=health+{country}&tbm=nws', headers=header).text
   soup: str = BeautifulSoup(html_text, 'lxml')
+ 
+  
 
   news: List[str] = soup.find_all('g-card', class_='nChh6e')
   # url: start=0 first google page, start=10 second google page ect

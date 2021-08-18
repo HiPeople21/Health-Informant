@@ -1,3 +1,20 @@
 {
-  "files": {}
+  "files": {
+    "app/app.py": [
+      {
+        "id": "d3f946c3-faba-4017-b5f2-b7502ff3c9d0",
+        "line": 34,
+        "version": 764,
+        "index": 1125
+      }
+    ],
+    "app/templates/index.html": [
+      {
+        "id": "15d41a06-70aa-4089-abee-de66689e5ec0",
+        "line": 6,
+        "version": 480,
+        "index": 79
+      }
+    ]
+  }
 }
