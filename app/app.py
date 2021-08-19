@@ -13,19 +13,22 @@ def home() ->str:
 def news() ->str:
   if request.method == 'POST':
     country: str = request.form['country']
-    news: List[Dict[str, str]] = scrape_health_news(country)
-    return redirect(url_for('news_country', country=country))
+    page: str = request.form['page']
+    news: List[Dict[str, str]] = scrape_health_news(country, page)
+    return redirect(url_for('news_country', country=country, page=page))
   else:
     news: List[Dict[str, str]] = scrape_health_news()
   return render_template('news.html', content={'news': news})
 
-@app.route('/news/<country>', methods=['GET', 'POST'])
-def news_country(country: str):
+@app.route('/news/<country>/<page>', methods=['GET', 'POST'])
+def news_country(country: str, page: str):
   if request.method == 'POST':
-    news: List[Dict[str, str]] = scrape_health_news(country)
-    return redirect(url_for('news_country', country=country))
+    country: str = request.form['country']
+    page: str = request.form['page']
+    news: List[Dict[str, str]] = scrape_health_news(country, page)
+    return redirect(url_for('news_country', country=country, page=page))
   else:
-    news: List[Dict[str, str]] = scrape_health_news(country)
+    news: List[Dict[str, str]] = scrape_health_news(country, page)
   return render_template('news.html', content={'news': news})
 
 

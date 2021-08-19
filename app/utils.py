@@ -2,13 +2,15 @@ from bs4 import BeautifulSoup
 import requests
 from typing import List, Dict
 
-def scrape_health_news(country: str='United States of America') -> List[Dict[str, str]]:
+def scrape_health_news(country: str='United States of America', page: str='1') -> List[Dict[str, str]]:
   '''
   Returns a dict of news items; the key being the contents and the value being the link
   '''
   header: Dict[str, str] = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'}
   
-  html_text: str = requests.get(f'https://www.google.com/search?q=health+{country}&tbm=nws', headers=header).text
+  search_page: int = (int(page) - 1) * 10
+
+  html_text: str = requests.get(f'https://www.google.com/search?q=health+{country}&tbm=nws&start={search_page}', headers=header).text
   soup: str = BeautifulSoup(html_text, 'lxml')
  
   

@@ -1,7 +1,13 @@
 {% extends 'base.html' %} {%block title%}Health News{%endblock%} {%block content%}
 <div class='news-form-container'>
-<form action="#" method="POST" class='news-form'>
-  <label for='country' id='country-label'>Country: </label>
+	<form action="#" method="POST" class='news-form'>
+		<!-- <label for='country' id='country-label'>Country: </label> -->
+
+		<!-- <label for='page' id='page-label'>Page: </label><input name='page' id ='page' type='number' min=1 value=1>
+<input class='submit-button btn btn-primary' type='submit' value='Submit'> -->
+
+		<div class="input-group mb-3">
+			<span class="input-group-text">Country</span>
   <select id="country" name="country">
     <option value="international"></option>
     <option disabled>-------------------</option>
@@ -252,26 +258,37 @@
     <option value="Zambia">Zambia</option>
     <option value="Zimbabwe">Zimbabwe</option>
 </select>
-<label for='page' id='page-label'>Page: </label><input id ='page' type='number' min=1 max=36 value=1>
-<input class='submit-button btn btn-primary' type='submit' value='Submit'>
+		</div>
+<div class="input-group mb-3">
+  <span class="input-group-text">Page</span>
+  <input type="number" class="form-control" id='page' name='page' placeholder="Page" aria-label="Page" min=1 value=1>
+  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Submit</button>
+</div>
 </form>
 </div>
 
 <div id='news-container'>
-	{% for news in content['news'] %}
-	<div class="card news-item">
-		<div class="news-publisher card-header">
-			{{news['publisher']}}
-		</div>
-		<div class="card-body">
-			<h5 class="card-title news-title">{{news['title']}}</h5>
-			<p class="news-text card-text">{{news['text']}}</p>
-			<a href="{{news['link']}}" class="news-item-link btn btn-primary">Visit article</a>
-		</div>
-		<div class="news-time card-footer text-muted">
-			{{news['time']}}
-		</div>
-	</div>
-	{% endfor %}
+  {% if content['news'] %}
+    {% for news in content['news'] %}
+    <div class="card news-item">
+      <div class="news-publisher card-header">
+        {{news['publisher']}}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title news-title">{{news['title']}}</h5>
+        <p class="news-text card-text">{{news['text']}}</p>
+        <a href="{{news['link']}}" class="news-item-link btn btn-primary">Visit article</a>
+      </div>
+      <div class="news-time card-footer text-muted">
+        {{news['time']}}
+      </div>
+    </div>
+    <br/>
+    {% endfor %}
+  {% else %}
+    <div class='News not found'>
+      <p>News not found. There is either no more news or the program has failed to retrieve the news. Please try again.</p>
+    </div>
+  {% endif %}
 </div>
 {%endblock%}
