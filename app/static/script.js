@@ -1,9 +1,14 @@
-window.onscroll = function() {scrollFunction()};
+// $(document).ready(function (){
+//   $('form').on('submit', function (event){
+//     $.ajax({
+//       data: {
+//         country: $('#country').val(),
+//         page: $('#page').val(),
+//       },
+//       type: 'POST',
+//       url: '/process'
+//     });
 
-function scrollFunction() {
-  if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-    document.getElementById("navbar").style.padding = "30px 10px";
-  } else {
-    document.getElementById("navbar").style.padding = "80px 10px";
-  }
-}
+    // event.preventDefault();
+//   });
+// });

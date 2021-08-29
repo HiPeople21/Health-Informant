@@ -1,0 +1,35 @@
+{% extends 'base.html' %} 
+{%block title%}Covid Information{%endblock%}
+
+{%block content%}
+<div class="covid-information">
+  <p></p>
+</div>
+<div class='covid-select-form-container'>
+  <form action="#" method="POST" class='covid-select-form'>
+    <select id="country" name="country">
+      <option value="international"></option>
+      <option disabled>-------------------</option>
+      {% for country in content['countries'] %}
+        <option value={{ country.strip() }}>{{ country.strip() }}</option>
+      {% endfor %}
+    </select>
+    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Submit</button>
+  </form>
+</div>
+<div class='stats'>
+  <table>
+    <tr>
+      <td>
+        <h3>Total Cases</h3>
+        <p>{{ content['info'][0] }}</p>
+      </td>
+      
+      <td>
+        <h3>Deaths</h3>
+        <p>{{ content['info'][1] }}</p>
+      </td>
+    </tr>
+  </table>
+</div>
+{%endblock%}

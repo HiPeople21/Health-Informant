@@ -1,3 +1,37 @@
+:root{
+  --blue-1: rgba(13, 110, 253, 1);
+  
+  --blue-darkest: #3852F2;
+  --blue-dark: #6278FE;
+  --blue-light: #8D9CFF;
+  --blue-lighest: #BEC7FF;
+
+  --pink-darkest: #CC22F0;
+  --pink-dark: #E050FE;
+  --pink-light: #E97FFF;
+  --pink-lighest: #F2B6FF;
+
+  
+  --purple-darkest: #7531F1;
+  --purple-dark: #955CFE;
+  --purple-light: #B288FF;
+  --purple-lighest: #D3BBFF;
+
+  --background-1: var(--blue-1);
+  --background-2: white;
+  --background-3: black;
+}
+
+
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background-1: var(--purple-darkest);
+    --background-2: black;
+    --background-3: white;
+  }
+} */
+
 .news-container{
   display: flex;
   flex-direction: column;
@@ -9,18 +43,16 @@
 .news-item{
   text-align: center;
   width: clamp(200px, 75%, 40rem);
-  margin: auto;
+  margin: auto
+
 }
 
-.navbar-container{
-  position: fixed;
-  width: 100vw;
-  top: 0;
-  z-index: 1;
-  border: 1px solid black;
-}
+
+
 .content-container{
-  margin-top: 60px;
+  padding-top: 60px;
+  background-color: var(--background-2);
+  min-height: 100vh;
 }
 
 .news-form{
@@ -39,4 +71,209 @@
 
 #page{
   width: 75px;
+}
+
+header{
+  background: var(--background-1);
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  z-index: 5;
+  top: 0;
+}
+
+.logo {
+  color: var(--background-3);
+}
+
+nav{
+  position: absolute;
+  text-align: left;
+  top: 100%;
+  left: 0;
+  background: var(--background-1);
+  width: 100%;
+  transform: scale(1, 0);
+  transform-origin: top;
+  transition: transform 400ms ease-in-out;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  margin-bottom: 1em;
+  margin-left: 1em;
+}
+
+nav a {
+  color: var(--background-3);
+  text-decoration: none;
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
+}
+
+
+nav button {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--background-3);
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
+}
+
+
+nav a:hover {
+  color: var(--background-3);
+}
+
+.nav-toggle {
+  display: none;
+}
+
+.nav-toggle-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 1em;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.nav-toggle-label span
+{
+  display: block;
+  background: var(--background-3);
+  height: 2px;
+  width: 2em;
+  border-radius: 2px;
+  position: relative;
+}
+
+
+.nav-toggle-label span::before{
+  display: block;
+  background: var(--background-3);
+  height: 2px;
+  width: 2em;
+  border-radius: 2px;
+  position: relative;
+}
+
+
+.nav-toggle-label span::after {
+  display: block;
+  background: var(--background-3);
+  height: 2px;
+  width: 2em;
+  border-radius: 2px;
+  position: relative;
+}
+
+.nav-toggle-label span::before{
+  content: '';
+  position: absolute;
+}
+
+.nav-toggle-label span::after {
+  content: '';
+  position: absolute;
+}
+
+.nav-toggle-label span::before{
+  bottom: 7px;
+}
+
+.nav-toggle-label span::after{
+  top: 7px;
+}
+
+.nav-toggle:checked ~ nav {
+  transform: scale(1, 1);
+}
+
+.nav-toggle:checked ~ nav a {
+  opacity: 1;
+  transition: opacity 250ms ease-in-out 250ms;
+}
+
+.nav-toggle:checked ~ nav button {
+  opacity: 1;
+  transition: opacity 250ms ease-in-out 250ms;
+}
+
+@media screen and (min-width: 800px) {
+  .nav-toggle-label {
+    display: none;
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: minmax(10px, 100px) auto minmax(600px, 3fr);
+  }
+
+  .logo {
+    grid-column: 2/ span 1;
+  }
+
+  nav{
+    all: unset;
+    grid-column: 3/ span 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  nav ul {
+    display: flex;
+  }
+
+  nav li {
+    margin-left: 3em;
+    margin-bottom: 0;
+  }
+
+  nav a {
+    opacity: 1;
+    position: relative;
+  }
+
+  .news-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  nav button {
+    opacity: 1;
+    position: relative;
+  }
+
+  nav a::before {
+    all: unset;
+    content: '';
+    display: block;
+    height: 5px;
+    background: var(--background-3);
+    position: absolute;
+    border-radius: 5px;
+    top: -.5em;
+    left: 0;
+    right: 0;
+    transform: scale(0, 1);
+    transition: transform ease-in-out 250ms;
+  }
+
+  nav a:hover::before {
+    transform: scale(1, 1);
+  }
+}
+
+.darkmode {
+  background-color: rgb(29,32,34) !important;
 }
