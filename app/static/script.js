@@ -1,14 +1,5 @@
-// $(document).ready(function (){
-//   $('form').on('submit', function (event){
-//     $.ajax({
-//       data: {
-//         country: $('#country').val(),
-//         page: $('#page').val(),
-//       },
-//       type: 'POST',
-//       url: '/process'
-//     });
-
-    // event.preventDefault();
-//   });
-// });
+$(function() {
+  $('.news-form-container').on('submit', function() {
+    $('.form-submit-button').html('Loading...');
+  });
+})

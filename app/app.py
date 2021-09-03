@@ -58,11 +58,5 @@ def covid_information(country: str = 'Global'):
                            })
 
 
-# @app.route('/process', methods=['POST'])
-# def process():
-#   country: str = request.form['country']
-#   page: str = request.form['page']
-#   return redirect(url_for('news_country', country=country, page=page))
-
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080, debug=True)

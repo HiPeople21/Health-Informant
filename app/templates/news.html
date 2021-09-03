@@ -22,7 +22,7 @@
   {% else %}
     <input type="number" class="form-control" id='page' name='page' placeholder="Page" aria-label="Page" min=1 value=1>
   {% endif %}
-  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Submit</button>
+  <button class="form-submit-button btn btn-outline-primary" type="submit" id="button-addon2">Submit</button>
 </div>
 </form>
 </div>
@@ -35,7 +35,7 @@
       <div class="news-publisher card-header">
         {{news['publisher']}}
       </div>
-      <div class="card-body">
+      <div class="card-body news-body">
         <h5 class="card-title news-title">{{news['title']}}</h5>
         <p class="news-text card-text">{{news['text']}}</p>
         <a href="{{news['link']}}" class="news-item-link btn btn-primary">Visit article</a>
@@ -47,7 +47,7 @@
     <br/>
     {% endfor %}
   {% else %}
-    <div class='news_not_found'>
+    <div class='news-not-found'>
       <p>News not found. There is either no more news or the program has failed to retrieve the news. Please try again.</p>
     </div>
   {% endif %}
