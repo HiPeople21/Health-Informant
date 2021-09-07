@@ -1,36 +1,140 @@
-{% extends 'base.html' %} 
-{%block title%}Covid Information{%endblock%}
+{% extends 'base.html' %} {%block title%}Covid Information{%endblock%} {%block content%}
+<div class='covid-information'>
+	<img class='covid-img' src='{{url_for('static', filename='images/covid.jpg')}}'>
+  <div class='covid-text'>
+      <p>Covid-19 (Coronavirus) is a virus that can be transmitted through the air when people talk, sneeze etc. as well as through the contact of surfaces.</p>
 
-{%block content%}
-<div class="covid-information">
-  <img class='covid-img' src='{{url_for("static", filename="images/covid.jpg")}}'
-  <p></p>
+      <p>It was first discovered around November 2019, in Wuhan, Hubei, China.</p>
+
+      <p>Symptoms include fever, fatigue, and difficculty breathing. Symptoms appear up to 14 days after catching the virus.</p>
+
+      <p>Covid can damage blood vessels if it becomes severe.</p>
+
+      <p>You can prevent catching Covid by:</p>
+      <ul class='prevention-list'>
+        <li class='covid-prevention'>Wearing a mask.</li>
+        <li class='covid-prevention'>Keeping away from other people.</li>
+        <li class='covid-prevention'>Washing your hands regularly.</li>
+        <li class='covid-prevention'>Don't touch your face.</li>
+      </ul>
+      <p>
+      You can find more information on the <a href='https://www.who.int/emergencies/diseases/novel-coronavirus-2019' target='_blank'>WHO's website</a> and <a href='https://en.wikipedia.org/wiki/COVID-19' target='_blank'>Wikipedia</a>.
+      </p>
+  </div>
 </div>
 <div class='covid-select-form-container'>
-  <form action="#" method="POST" class='covid-select-form'>
-    <select id="country" name="country">
-      <option value="international"></option>
-      <option disabled>-------------------</option>
-      {% for country in content['countries'] %}
-        <option value={{ country.strip() }}>{{ country.strip() }}</option>
-      {% endfor %}
-    </select>
-    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Submit</button>
+	<form action='#' method='POST' class='covid-form'>
+    <div class='input-group mb-3'>
+		<span class='covid-form-label input-group-text'>Country</span>
+      <select class='covid-country-select' id='country' name='country'>
+        <option value='World'>World</option>
+        <option disabled>-------------------</option>
+        {% for country in content['countries'] %}
+          {% if country.strip() == content['country'] %}
+            <option value={{ country.strip() }} selected>{{ country.strip() }}</option>
+          {% else %}
+          <option value={{ country.strip() }}>{{ country.strip() }}</option>
+          {% endif %}
+        {% endfor %}
+      </select>
+    <button class='form-submit-button btn btn-outline-primary' type='submit' id='button-addon2'>Submit</button>
+    </div>
   </form>
 </div>
 <div class='stats'>
-  <table>
-    <tr>
-      <td>
-        <h3>Total Cases</h3>
-        <p>{{ content['info'][0] }}</p>
-      </td>
-      
-      <td>
-        <h3>Deaths</h3>
-        <p>{{ content['info'][1] }}</p>
-      </td>
-    </tr>
-  </table>
+  {% if content['info'] %}
+    <table class='data-table'>
+      <thead class='data-table-head'>
+        <tr class='data-table-head-row'>
+          <th class='data-table-head-row-heading'>
+            <p>Total Cases</p> 
+          </th>
+
+          <th class='data-table-head-row-heading'>
+            <p>New Cases</p> 
+          </th>
+
+          <th class='data-table-head-row-heading'>
+            <p>Total Deaths</p> 
+          </th>
+
+          <th class='data-table-head-row-heading'>
+            <p>New Deaths</p> 
+          </th>
+
+          <th class='data-table-head-row-heading'>
+            <p>Total Recovered</p> 
+          </th>
+
+          <th class='data-table-head-row-heading'>
+            <p>New Recovered</p> 
+          </th>
+
+          <th class='data-table-head-row-heading'>
+            <p>Active Cases</p> 
+          </th>
+
+          <th class='data-table-head-row-heading'>
+            <p>Serious, Critical</p> 
+          </th>
+
+          <th class='data-table-head-row-heading'>
+            <p>Total Tests</p> 
+          </th>
+
+          <th class='data-table-head-row-heading'>
+            <p>Population</p> 
+          </th>
+        </tr>
+      </thead>
+      <tbody class='data-table-body'>
+        <tr class='data-table-body-row'>
+          <td class='data-table-body-row-data'>
+            <p>{{ content['info'][1] }}</p>
+          </td>
+          
+          <td class='data-table-body-row-data'>
+            <p>{{ content['info'][2] }}</p>
+          </td>
+
+          <td class='data-table-body-row-data'>
+            <p>{{ content['info'][3] }}</p>
+          </td>
+          
+          <td class='data-table-body-row-data'>
+            <p>{{ content['info'][4] }}</p>
+          </td>
+
+          <td class='data-table-body-row-data'>
+            <p>{{ content['info'][5] }}</p>
+          </td>
+          
+          <td class='data-table-body-row-data'>
+            <p>{{ content['info'][6] }}</p>
+          </td>
+          
+          <td class='data-table-body-row-data'>
+            <p>{{ content['info'][7] }}</p>
+          </td>
+          
+          <td class='data-table-body-row-data'>
+            <p>{{ content['info'][8] }}</p>
+          </td>
+          
+          <td class='data-table-body-row-data'>
+            <p>{{ content['info'][11] }}</p>
+          </td>
+          
+          <td class='data-table-body-row-data'>
+            <p>{{ content['info'][13] }}</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  {% else %}
+    <div class='stats-not-found'>
+      <p>Statistics not found. Please try again.</p>
+    </div>
+  {% endif %}
 </div>
 {%endblock%}

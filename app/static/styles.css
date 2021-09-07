@@ -24,6 +24,41 @@
   --card-header-text-color: #212529;
   --card-footer-text-color: #555555;
   --card-body-color: white;
+  --form-label-background-color: #e9ecef;
+  --form-label-color: #212529;
+  --form-label-border-color: #ced4da;
+  --form-select-background: white;
+  --form-select-text: black;
+  --form-select-border: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+  --scroll-track: #fcfcfc;
+  --scroll-thumb: #888;
+  --scroll-hover: #555;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: .5rem;
+}
+
+
+::-webkit-scrollbar-track {
+  background: var(--scroll-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb);
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scroll-hover);
 }
 
 .darkmode {
@@ -34,13 +69,47 @@
   --card-header-text-color: white;
   --card-footer-text-color: #555555;
   --card-body-color: #3a3a3a;
+  --form-label-background-color: #232629;
+  --form-label-color: #c7d2dd;
+  --form-label-border-color: black;
+  --form-select-background: rgb(65, 65, 65);
+  --form-select-text: rgb(228, 180, 180);
+  --form-select-border: black;
+  --scroll-track: rgb(12, 12, 12);
+  --scroll-thumb: rgb(117, 117, 117);
+  --scroll-hover: rgb(48, 48, 48);
+}
+
+.skeleton {
+  animation: skeleton-loading 1s linear ininite alternate;
+}
+
+@keyframes skeleton-loading {
+  0%{
+    background-color: hsl(200,20%,70%);
+  }
+  100%{
+    background-color: hsl(200,20%,95%);
+  }
 }
 
 p {
   color: var(--background-3);
 }
 
+span {
+  color: var(--background-3);
+}
+
+h2 {
+  color: var(--background-3);
+}
+
 h3 {
+  color: var(--background-3);
+}
+
+h4 {
   color: var(--background-3);
 }
 
@@ -49,11 +118,6 @@ h3 {
   min-height: 100vh;
 }
 
-
-.covid-img {
-  width: 5em;
-  height: auto;
-}
 
 
 
@@ -167,6 +231,8 @@ nav a {
   font-size: 1.2rem;
   opacity: 0;
   transition: opacity 150ms ease-in-out;
+  white-space: nowrap;
+  
 }
 
 
@@ -263,17 +329,13 @@ nav a:hover {
 
 @media screen and (min-width: 800px) {
 
-  .content-container {
-    top: 40px;
-  }
-
   .nav-toggle-label {
     display: none;
   }
 
   header {
     display: grid;
-    grid-template-columns: minmax(10px, 100px) auto minmax(10px, 1fr);
+    grid-template-columns: 1fr auto auto 2fr;
     padding: 10px 0;
   }
 
@@ -332,3 +394,128 @@ nav a:hover {
 }
 
 /* End of navbar CSS */
+
+/* Start of Covid page styling */
+.data-table{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid black;
+  /* border-radius: 50%; */
+}
+
+.data-table-head-row{
+  display: flex;
+  flex-direction: column;
+}
+
+.data-table-body-row{
+  display: flex;
+  flex-direction: column;
+}
+
+.data-table-head-row-heading {
+  text-align: center;
+  height: 2em;
+  border: 1px solid black;
+}
+
+.data-table-body-row-data{
+  text-align: center;
+  height: 2em;
+  border: 1px solid black;
+}
+
+.covid-information {
+  width: 95%;
+  margin: auto;
+}
+
+.covid-prevention {
+  color: var(--background-3);
+}
+
+.covid-img {
+  width: 100%;
+
+  height: auto;
+}
+
+.prevention-list {
+  margin-top: -15px;
+}
+
+.covid-text {
+  margin: .5em;
+}
+
+.covid-select-form-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+}
+
+.covid-form-label {
+  background-color: var(--form-label-background-color) !important;
+  color: var(--form-label-color) !important;
+  border-color: var(--form-label-border-color) !important;
+}
+
+.covid-country-select {
+  background-color: var(--form-select-background);
+  color: var(--form-select-text);
+  border-color: var(--form-select-border);
+}
+
+@media screen and (min-width: 800px) {
+  .covid-information {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .prevention-list {
+    margin-top: 0;
+    position: relative;
+  }
+
+  .covid-text {
+    overflow-y: auto;
+  }
+
+  .covid-img {
+    height: auto;
+    width: 100%;
+  }
+}
+/* End of Covid page styling */
+
+/* Start of contact section styling */
+.contact {
+  background-color: var(--card-header-footer-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px 0;
+  border: 1px solid black;
+}
+
+.contact-link {
+  display: flex;
+  color: var(--background-3);
+  padding: .25em;
+  border: 1px solid var(--background-3);
+  border-radius: 50%;
+  text-align: center;
+  text-decoration: none;
+  transition: transform 150ms ease-in-out, margin-top 150ms ease-in-out, margin-bottom 150ms ease-in-out;
+}
+
+.contact-link:hover {
+  color: var(--background-3);
+  transform: scale(2);
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+/* End of contact section styling */

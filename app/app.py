@@ -25,8 +25,7 @@ def home() -> str:
 def news(country: str = 'International', page: str = '1') -> str:
     if request.method == 'POST':
         country: str = request.form['country']
-        page: str = request.form['page']
-        # news: List[Dict[str, str]] = scrape_health_news(country, page)
+        page: str = request.form['page'] if request.form['page'] else '1'
         return redirect(url_for('news', country=country, page=page))
 
     news: List[Dict[str, str]] = scrape_health_news(country, page)
@@ -42,7 +41,7 @@ def news(country: str = 'International', page: str = '1') -> str:
 
 @app.route('/covid', methods=['GET', 'POST'])
 @app.route('/covid/<country>', methods=['GET', 'POST'])
-def covid_information(country: str = 'Global'):
+def covid_information(country: str = 'World'):
     if request.method == 'POST':
         country: str = request.form['country']
         return redirect(url_for('covid_information', country=country))
@@ -58,5 +57,5 @@ def covid_information(country: str = 'Global'):
                            })
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)

@@ -11,7 +11,7 @@ def scrape_health_news(country: str, page: str) -> List[Dict[str, str]]:
     # User-Agent for browser
     header: Dict[str, str] = {
         'User-Agent':
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
     }
 
     # Variable in Google url called 'start' determined the page. 'start=0' means page 1, 'start=10' is page 2 ect.
@@ -47,29 +47,6 @@ def scrape_health_news(country: str, page: str) -> List[Dict[str, str]]:
         for i in news
     ]
 
-    # Code above does the same as code below
-
-    # publishers: List[str] = []
-    # titles: List[str] = []
-    # links: List[str] = []
-    # times: List[str] = []
-    # main_text: List[str] = []
-    # for i in news:
-    #   new_soup = BeautifulSoup(str(i), 'lxml')
-    #   links.append(new_soup.find('a').get('href'))
-    # for i in news:
-    #   new_soup = BeautifulSoup(str(i), 'lxml')
-    #   titles.append(new_soup.find('div', class_='JheGif nDgy9d').text)
-    # for i in news:
-    #   new_soup = BeautifulSoup(str(i), 'lxml')
-    #   publishers.append(new_soup.find('div', class_='XTjFC WF4CUc').text)
-    # for i in news:
-    #   new_soup = BeautifulSoup(str(i), 'lxml')
-    #   times.append(new_soup.find('span', class_='WG9SHc').text)
-    # for i in news:
-    #   new_soup = BeautifulSoup(str(i), 'lxml')
-    #   main_text.append(new_soup.find('div', class_='Y3v8qd').text)
-
     # Returns a list with dictionaries containing all the information
     filtered_news: List[Dict[str, str]] = [{
         'publisher': publishers[i],
@@ -83,49 +60,36 @@ def scrape_health_news(country: str, page: str) -> List[Dict[str, str]]:
 
 
 def scrape_covid_information(country: str):
-    """
+  """
   Scrapes Covid statistics from Google
   """
 
-    # User-Agent for browser
-    header: Dict[str, str] = {
-        'User-Agent':
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'
-    }
+  # User-Agent for browser
+  header: Dict[str, str] = {
+    'User-Agent':
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
+  }
 
-    # Gets page markup
-    html_text: str = requests.get(
-        f'https://www.google.com/search?q={country}+Coronavirus+stats',
-        headers=header).text
+  # Gets page markup
+  html_text: str = requests.get(
+      'https://www.worldometers.info/coronavirus/?zarsrc=130',
+      headers=header).text
 
-    soup: str = BeautifulSoup(html_text, 'lxml')
+  soup: str = BeautifulSoup(html_text, 'lxml')
 
-    stats_table: List[str] = soup.find('table', class_='qyEGdc')
+  # Tbody contains data needed
+  stats_table: List[str] = soup.find('tbody')
 
-    new_soup: str = BeautifulSoup(str(stats_table), 'lxml')
+  new_soup: str = BeautifulSoup(str(stats_table), 'lxml')
 
-    stats_html: List[str] = new_soup.find_all('td')
+  # Finds the tag with the data
+  stats_html: str = new_soup.find('td', text=country).parent 
 
-    stats: List[str] = [
-        BeautifulSoup(str(i), 'lxml').find('span').text for i in stats_html
-    ]
+  # Gathers the data
+  stats: List[str] = [i.text for i in stats_html.find_all('td') if not 'display:none' in str(i)][1:15]
 
-    # Code above same as code below
-
-    # for i in stats_html:
-    #   new_soup: str = BeautifulSoup(str(i), 'lxml')
-    #   stats.append(new_soup.find('span').text)
-
-    return stats
-
-
-
-
-x = requests.get('https://www.worldometers.info/coronavirus/?zarsrc=130#countries').text
-y = BeautifulSoup(x, 'lxml')
-z = y.find_all('a', class_='mt_a')
-a=[]
-for i in z:
-  a.append(i.text)
-a.sort()
-print(a)
+  # Replaces all empty strings with '-'
+  for i in stats:
+    if not i:
+      stats[stats.index(i)] = '-'
+  return stats
