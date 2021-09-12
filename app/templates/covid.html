@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {%block title%}Covid Information{%endblock%} {%block content%}
 <div class='covid-information'>
-	<img class='covid-img' src='{{url_for('static', filename='images/covid.jpg')}}'>
+	<img alt='Covid image' class='covid-img' src='{{url_for('static', filename='images/covid.jpg')}}'>
   <div class='covid-text'>
       <p>Covid-19 (Coronavirus) is a virus that can be transmitted through the air when people talk, sneeze etc. as well as through the contact of surfaces.</p>
 
@@ -8,7 +8,7 @@
 
       <p>Symptoms include fever, fatigue, and difficculty breathing. Symptoms appear up to 14 days after catching the virus.</p>
 
-      <p>Covid can damage blood vessels if it becomes severe.</p>
+      <p>Covid can damage blood vessels if it becomes severe. It can also cause influenza.</p>
 
       <p>You can prevent catching Covid by:</p>
       <ul class='prevention-list'>
@@ -25,8 +25,8 @@
 <div class='covid-select-form-container'>
 	<form action='#' method='POST' class='covid-form'>
     <div class='input-group mb-3'>
-		<span class='covid-form-label input-group-text'>Country</span>
-      <select class='covid-country-select' id='country' name='country'>
+		<span class='forms-label input-group-text'>Country</span>
+      <select class='form-select country-selects' id='country' name='country'>
         <option value='World'>World</option>
         <option disabled>-------------------</option>
         {% for country in content['countries'] %}
@@ -42,99 +42,128 @@
   </form>
 </div>
 <div class='stats'>
-  {% if content['info'] %}
-    <table class='data-table'>
-      <thead class='data-table-head'>
-        <tr class='data-table-head-row'>
-          <th class='data-table-head-row-heading'>
-            <p>Total Cases</p> 
-          </th>
+  <table class='data-table'>
+    <thead class='data-table-head'>
+      <tr class='data-table-head-row'>
+        <th class='data-table-head-row-heading'>
+          <p>Total Cases</p> 
+        </th>
 
-          <th class='data-table-head-row-heading'>
-            <p>New Cases</p> 
-          </th>
+        <th class='data-table-head-row-heading'>
+          <p>New Cases</p> 
+        </th>
 
-          <th class='data-table-head-row-heading'>
-            <p>Total Deaths</p> 
-          </th>
+        <th class='data-table-head-row-heading'>
+          <p>Total Deaths</p> 
+        </th>
 
-          <th class='data-table-head-row-heading'>
-            <p>New Deaths</p> 
-          </th>
+        <th class='data-table-head-row-heading'>
+          <p>New Deaths</p> 
+        </th>
 
-          <th class='data-table-head-row-heading'>
-            <p>Total Recovered</p> 
-          </th>
+        <th class='data-table-head-row-heading'>
+          <p>Total Recovered</p> 
+        </th>
 
-          <th class='data-table-head-row-heading'>
-            <p>New Recovered</p> 
-          </th>
+        <th class='data-table-head-row-heading'>
+          <p>New Recovered</p> 
+        </th>
 
-          <th class='data-table-head-row-heading'>
-            <p>Active Cases</p> 
-          </th>
+        <th class='data-table-head-row-heading'>
+          <p>Active Cases</p> 
+        </th>
 
-          <th class='data-table-head-row-heading'>
-            <p>Serious, Critical</p> 
-          </th>
+        <th class='data-table-head-row-heading'>
+          <p>Serious, Critical</p> 
+        </th>
 
-          <th class='data-table-head-row-heading'>
-            <p>Total Tests</p> 
-          </th>
+        <th class='data-table-head-row-heading'>
+          <p>Total Tests</p> 
+        </th>
 
-          <th class='data-table-head-row-heading'>
-            <p>Population</p> 
-          </th>
-        </tr>
-      </thead>
-      <tbody class='data-table-body'>
-        <tr class='data-table-body-row'>
-          <td class='data-table-body-row-data'>
-            <p>{{ content['info'][1] }}</p>
-          </td>
-          
-          <td class='data-table-body-row-data'>
-            <p>{{ content['info'][2] }}</p>
-          </td>
+        <th class='data-table-head-row-heading'>
+          <p>Population</p> 
+        </th>
+      </tr>
+    </thead>
+    <tbody class='data-table-body'>
+      <tr class='data-table-body-row'>
+        <td class='data-table-body-row-data'>
+          <p class='skeleton covid-data'></p>
+        </td>
+        
+        <td class='data-table-body-row-data'>
+          <p class='skeleton covid-data'></p>
+        </td>
 
-          <td class='data-table-body-row-data'>
-            <p>{{ content['info'][3] }}</p>
-          </td>
-          
-          <td class='data-table-body-row-data'>
-            <p>{{ content['info'][4] }}</p>
-          </td>
+        <td class='data-table-body-row-data'>
+          <p class='skeleton covid-data'></p>
+        </td>
+        
+        <td class='data-table-body-row-data'>
+          <p class='skeleton covid-data'></p>
+        </td>
 
-          <td class='data-table-body-row-data'>
-            <p>{{ content['info'][5] }}</p>
-          </td>
-          
-          <td class='data-table-body-row-data'>
-            <p>{{ content['info'][6] }}</p>
-          </td>
-          
-          <td class='data-table-body-row-data'>
-            <p>{{ content['info'][7] }}</p>
-          </td>
-          
-          <td class='data-table-body-row-data'>
-            <p>{{ content['info'][8] }}</p>
-          </td>
-          
-          <td class='data-table-body-row-data'>
-            <p>{{ content['info'][11] }}</p>
-          </td>
-          
-          <td class='data-table-body-row-data'>
-            <p>{{ content['info'][13] }}</p>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  {% else %}
-    <div class='stats-not-found'>
-      <p>Statistics not found. Please try again.</p>
-    </div>
-  {% endif %}
+        <td class='data-table-body-row-data'>
+          <p class='skeleton covid-data'></p>
+        </td>
+        
+        <td class='data-table-body-row-data'>
+          <p class='skeleton covid-data'></p>
+        </td>
+        
+        <td class='data-table-body-row-data'>
+          <p class='skeleton covid-data'></p>
+        </td>
+        
+        <td class='data-table-body-row-data'>
+          <p class='skeleton covid-data'></p>
+        </td>
+        
+        <td class='data-table-body-row-data'>
+          <p class='skeleton covid-data'></p>
+        </td>
+        
+        <td class='data-table-body-row-data'>
+          <p class='skeleton covid-data'></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p class='source'>Source: <a href='https://worldometers.info' target='_blank'>Worldometers.info</a></p>
 </div>
+{%endblock%}
+
+{% block scripts %}
+<script type="text/javascript">
+  var dataHolder = document.getElementsByClassName('covid-data');
+  var country = {{content['country_js']|safe}}
+  var toggleButton = document.querySelector('toggle-chart-button');
+  var ctx = document.getElementById('myChart');
+  var covidData = [];
+
+  $(window).on('load', function () {
+
+    $.ajax({
+        data : {
+          country: country,
+        },
+        type : 'POST',
+        url : '/load-covid-data'
+      })
+      .done(function(data) {
+        covidData = data;
+        for (let i = 0; i < data.length; i++) {
+          dataHolder[i].innerHTML = data[i];
+          dataHolder[i].classList.remove('skeleton');
+        }
+        
+
+      });
+  });
+
+
+  
+
+</script>
 {%endblock%}

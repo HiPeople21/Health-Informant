@@ -33,10 +33,22 @@
   --scroll-track: #fcfcfc;
   --scroll-thumb: #888;
   --scroll-hover: #555;
+  --spinner-color: #212529;
+  --loading-spinner: #0d6efd;
+  --loading-spinner-hover: white;
+  --skeleton-load-1: hsl(200,20%,70%);
+  --skeleton-load-2: hsl(200,20%,95%);
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  min-height: 100vh;
 }
 
 * {
@@ -78,22 +90,41 @@ html {
   --scroll-track: rgb(12, 12, 12);
   --scroll-thumb: rgb(117, 117, 117);
   --scroll-hover: rgb(48, 48, 48);
+  --spinner-color: white;
+  --loading-spinner: #0d6efd;
+  --loading-spinner-hover: white;
+  --skeleton-load-1: rgb(40, 55, 63);
+  --skeleton-load-2: rgb(28, 36, 37);
 }
 
 .skeleton {
-  animation: skeleton-loading 1s linear ininite alternate;
+  animation: skeleton-loading 1s linear infinite alternate;
+  width: 50%;
+  height: 1rem;
+  margin: auto;
+  border-radius: .125rem;
 }
 
 @keyframes skeleton-loading {
   0%{
-    background-color: hsl(200,20%,70%);
+    background-color: var(--skeleton-load-1);
   }
   100%{
-    background-color: hsl(200,20%,95%);
+    background-color: var(--skeleton-load-2);
   }
 }
 
 p {
+  color: var(--background-3);
+}
+
+noscript {
+  color: var(--background-3);
+  text-align: center;
+  width: 100%;
+}
+
+img {
   color: var(--background-3);
 }
 
@@ -115,11 +146,78 @@ h4 {
 
 .content-container{
   background-color: var(--background-2);
-  min-height: 100vh;
+  flex: 1 1 auto;
 }
 
+.loading-spinner {
+  color: var(--loading-spinner) !important;
+}
 
+.form-submit-button:hover{
+  color: var(--loading-spinner-hover) !important;
+}
 
+.forms-label {
+  background-color: var(--form-label-background-color) !important;
+  color: var(--form-label-color) !important;
+  border-color: var(--form-label-border-color) !important;
+}
+
+.country-selects {
+  background-color: var(--form-select-background) !important;
+  color: var(--form-select-text) !important;
+  border-color: var(--form-select-border) !important;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Start of CSS for home page */
+.physical-title,
+.mental-title {
+  width: 100%;
+  text-align: center;
+}
+
+.physical-text,
+.mental-text {
+  margin: auto;
+  width: 95%;
+  text-align: center;
+}
+
+.disclaimer {
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+}
+
+.mental-list {
+  color: var(--background-3);
+}
+
+.sleep-list-item {
+  background-color: var(--card-body-color) !important;
+  color: var(--background-3) !important; 
+}
+
+.brain-img{
+  width: 95%;
+  height: auto;
+  margin: auto;
+  display: flex;
+}
+.physical-list{
+  color: var(--background-3);
+}
+.exercise-img{
+  width: 95%;
+  height: auto;
+  margin: auto;
+  display: flex;
+}
+/* End of CSS for home page */
 
 /* Start of CSS for news page */
 
@@ -168,9 +266,12 @@ h4 {
 
 }
 
-#page{
-  width: 75px;
+
+.news-spinner {
+  color: var(--spinner-color);
+  margin-bottom: 0;
 }
+
 
 /* End of CSS for news page */
 
@@ -182,7 +283,7 @@ header{
   width: 100%;
   z-index: 5;
   top: 0;
-  height: 2%;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -265,7 +366,9 @@ nav a:hover {
   align-items: center;
 }
 
-.nav-toggle-label span
+.nav-toggle-label span,
+.nav-toggle-label span::after,
+.nav-toggle-label span::before
 {
   display: block;
   background: var(--background-3);
@@ -276,34 +379,13 @@ nav a:hover {
 }
 
 
-.nav-toggle-label span::before{
-  display: block;
-  background: var(--background-3);
-  height: 2px;
-  width: 2em;
-  border-radius: 2px;
-  position: relative;
-}
 
-
-.nav-toggle-label span::after {
-  display: block;
-  background: var(--background-3);
-  height: 2px;
-  width: 2em;
-  border-radius: 2px;
-  position: relative;
-}
-
+.nav-toggle-label span::after,
 .nav-toggle-label span::before{
   content: '';
   position: absolute;
 }
 
-.nav-toggle-label span::after {
-  content: '';
-  position: absolute;
-}
 
 .nav-toggle-label span::before{
   bottom: 7px;
@@ -317,15 +399,12 @@ nav a:hover {
   transform: scale(1, 1);
 }
 
+.nav-toggle:checked ~ nav button,
 .nav-toggle:checked ~ nav a {
   opacity: 1;
   transition: opacity 250ms ease-in-out 250ms;
 }
 
-.nav-toggle:checked ~ nav button {
-  opacity: 1;
-  transition: opacity 250ms ease-in-out 250ms;
-}
 
 @media screen and (min-width: 800px) {
 
@@ -362,16 +441,14 @@ nav a:hover {
     margin-bottom: 0;
   }
 
-  nav a {
-    opacity: 1;
-    position: relative;
-  }
-
-
+  nav a,
   nav button {
     opacity: 1;
     position: relative;
   }
+
+
+   
 
   nav a::before {
     all: unset;
@@ -401,18 +478,14 @@ nav a:hover {
   display: grid;
   grid-template-columns: 1fr 1fr;
   border: 1px solid black;
-  /* border-radius: 50%; */
 }
 
-.data-table-head-row{
-  display: flex;
-  flex-direction: column;
-}
-
+.data-table-head-row,
 .data-table-body-row{
   display: flex;
   flex-direction: column;
 }
+
 
 .data-table-head-row-heading {
   text-align: center;
@@ -424,6 +497,8 @@ nav a:hover {
   text-align: center;
   height: 2em;
   border: 1px solid black;
+  display: flex;
+  justify-content: center;
 }
 
 .covid-information {
@@ -437,7 +512,7 @@ nav a:hover {
 
 .covid-img {
   width: 100%;
-
+  border: 1px solid black;
   height: auto;
 }
 
@@ -456,36 +531,47 @@ nav a:hover {
   margin-top: 1em;
 }
 
-.covid-form-label {
-  background-color: var(--form-label-background-color) !important;
-  color: var(--form-label-color) !important;
-  border-color: var(--form-label-border-color) !important;
+.toggle-chart-button-holder {
+  display: flex;
+  justify-content: center;
 }
 
-.covid-country-select {
-  background-color: var(--form-select-background);
-  color: var(--form-select-text);
-  border-color: var(--form-select-border);
+.toggle-chart-button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 10rem;
+  display: block;
+}
+
+.source {
+  width: 100%;
+  text-align:center;
 }
 
 @media screen and (min-width: 800px) {
-  .covid-information {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
 
   .prevention-list {
     margin-top: 0;
     position: relative;
+    transform: translate(20px);
   }
 
   .covid-text {
     overflow-y: auto;
+    display: inline;
   }
 
+  .covid-text p {
+    position: relative;
+    top: -10px;
+  }
   .covid-img {
+    border: 1px solid black;
+    float: left;
     height: auto;
-    width: 100%;
+    width: 50%;
+    margin-right: 10px;
+    margin-top: 15px;
   }
 }
 /* End of Covid page styling */

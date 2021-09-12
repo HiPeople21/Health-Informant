@@ -2,8 +2,8 @@
 <div class='news-form-container'>
 	<form action="#" method="POST" class='news-form'>
 		<div class="input-group mb-3">
-			<span class="input-group-text">Country</span>
-  <select id="country" name="country">
+			<span class="forms-label input-group-text">Country</span>
+  <select class='country-selects form-select' id="country" name="country">
     <option value="international"></option>
     <option disabled>-------------------</option>
     {% for country in content['countries'] %}
@@ -14,42 +14,73 @@
       {% endif %}
     {% endfor %}
 </select>
+<button class="form-submit-button btn btn-outline-primary" type="submit" id="button-addon2">Submit</button>
 		</div>
-<div class="input-group mb-3">
-  <span class="input-group-text">Page</span>
-  {% if content.get('page') %}
-    <input type="number" class="form-control" id='page' name='page' placeholder="Page" aria-label="Page" min=1 value={{content['page']}}>
-  {% else %}
-    <input type="number" class="form-control" id='page' name='page' placeholder="Page" aria-label="Page" min=1 value=1>
-  {% endif %}
-  <button class="form-submit-button btn btn-outline-primary" type="submit" id="button-addon2">Submit</button>
-</div>
+
 </form>
 </div>
 
 <div id='news-container'>
-  <!-- If statement below check if there is any dictionaries in the list of news. If there isn't, a 'news not found' paragraph will show. -->
-  {% if content['news'] %}
-    {% for news in content['news'] %}
-    <div class="card news-item">
-      <div class="news-publisher card-header">
-        {{news['publisher']}}
-      </div>
-      <div class="card-body news-body">
-        <h5 class="card-title news-title">{{news['title']}}</h5>
-        <p class="news-text card-text">{{news['text']}}</p>
-        <a href="{{news['link']}}" class="news-item-link btn btn-primary">Visit article</a>
-      </div>
-      <div class="news-time card-footer text-muted">
-        {{news['time']}}
-      </div>
-    </div>
-    <br/>
-    {% endfor %}
-  {% else %}
-    <div class='news-not-found'>
-      <p>News not found. There is either no more news or the program has failed to retrieve the news. Please try again.</p>
-    </div>
-  {% endif %}
+  
 </div>
+<div class="d-flex justify-content-center mb-3" id="sentinel">
+    <div class="spinner-border news-spinner" role="status"></div>
+</div>
+<br>
+{%endblock%}
+
+
+{%block scripts%}
+<script type="text/javascript">
+  var country = {{content['country_js']|safe}};
+  var template = document.querySelector('#news-template');
+  var sentinel = document.querySelector('#sentinel');
+  var newsContainer = document.querySelector('#news-container');
+  var page = 0;
+
+  function loadNews() {
+        $.ajax({
+        data : {
+          country: country,
+          page: page,
+        },
+        type : 'POST',
+        url : '/load-news'
+      })
+      .done(function(data) {
+        if (!data.length) {
+
+          sentinel.innerHTML = "<p>News not found</p>";
+          return;
+        }
+        for (news of data) {
+          let templateClone = template.content.cloneNode(true);
+
+          templateClone.querySelector(".news-publisher").innerHTML = `${news['publisher']}`;
+          templateClone.querySelector(".news-title").innerHTML = `${news['title']}`;
+          templateClone.querySelector(".news-text").innerHTML = `${news['text']}`;
+          templateClone.querySelector(".news-item-link").href = `${news['link']}`;
+          templateClone.querySelector(".news-time").innerHTML = `${news['time']}`;
+
+          newsContainer.appendChild(templateClone);
+          
+        }
+        page += 1;
+      
+      });
+  }
+
+  var intersectionObserver = new IntersectionObserver(entries => {
+
+    
+    if (entries[0].intersectionRatio <= 0) {
+      return;
+    }
+
+    loadNews();
+
+  });
+
+  intersectionObserver.observe(sentinel);
+</script>
 {%endblock%}

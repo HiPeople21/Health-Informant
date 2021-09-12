@@ -1,19 +1,11 @@
 {
   "files": {
-    "app/templates/index.html": [
-      {
-        "id": "15d41a06-70aa-4089-abee-de66689e5ec0",
-        "line": 6,
-        "version": 480,
-        "index": 79
-      }
-    ],
     "app/utils.py": [
       {
         "id": "c46b2b28-fe3d-4a9e-9acf-c78de8382dae",
-        "line": 95,
-        "version": 3834,
-        "index": 2977
+        "line": 82,
+        "version": 4800,
+        "index": 2668
       }
     ]
   }

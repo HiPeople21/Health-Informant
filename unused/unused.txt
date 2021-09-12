@@ -1,1 +1,11 @@
 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36
+
+<!-- {% if content['news'] %}
+    {% for news in content['news'] %} -->
+    
+    <!-- {% endfor %}
+  {% else %}
+    <div class='news-not-found'>
+      <p>News not found. There is either no more news or the program has failed to retrieve the news. Please try again.</p>
+    </div>
+  {% endif %} -->

@@ -2,5 +2,61 @@
 {%block title%}Home{%endblock%}
 
 {%block content%}
+<div class="physical-health">
+  <h2 class="physical-title">Physical Health</h2>
+  <img class='exercise-img' src='{{url_for('static', filename='images/exercise.jpg')}}' alt='brain image'>
+  <div class='physical-text'>
+    <p>
+      Your physical health is important because it is interconnected with your physical body. 
+    </p>
+    <p>
+      If your physical health is not good, you may become less productive, catch illnesses easily or have less self-esteem.
+    </p>
+    <p>Here are 3 ways to have a healthy mind</p>
+    <ul class='physical-list'>
+      <li>Healthy eating.</li>
+      <li>Living an active lifestyle.</li>
+      <li>Being hygenic.</li>
+    </ul>
+  </div>
+</div>
+<div class='mental-health'>
+  <h2 class="mental-title">Mental Health</h2>
+  <img class='brain-img' src='{{url_for('static', filename='images/brain.jpg')}}' alt='brain image'>
+  <div class='mental-text'>
+    <p>
+      Your mental health is important as your mental state is what a large factor on the decisions you make.
+    </p>
+    <p>
+      Examples of things that can negatively impact your mental health are depression and anxiety. If your mental state gets too bad, you may think about committing suicide. If you're thinking about committing suicide, please seek help. Here is a <a target='_blank' href='https://www.suicidestop.com/call_a_hotline.html'>list of suicide hotlines</a>. Severe cases mental illnesses can also shorten your lifespan by upwards of 10 years.
+    </p>
+    <p>Here are 3 ways to have a healthy mind:</p>
+    <ul class='mental-list'>
+      <li>Getting enough sleep. Sleep gives time for our brain to rest, process information, and store things that happened in long term memory. Here's how much sleep you should get daily:
+        <ul class='list-group sleep-list'>
+          <li class="list-group-item sleep-list-item">0-3 months: 14-17 hours</li>
+          <li class="list-group-item sleep-list-item">4-12 months: 12-16 hours</li>
+          <li class="list-group-item sleep-list-item">1-2 years: 11-14 hours</li>
+          <li class="list-group-item sleep-list-item">3-5 years: 9-12 hours</li>
+          <li class="list-group-item sleep-list-item">6-12 years: 12-16 hours</li>
+          <li class="list-group-item sleep-list-item">13-18 years: 8-10 hours</li>
+          <li class="list-group-item sleep-list-item">18-60 years: 7+ hours</li>
+          <li class="list-group-item sleep-list-item">61-64 years: 7-9 hours</li>
+          <li class="list-group-item sleep-list-item">65+ years: 7-8 hours</li>
+        </ul>
+        Source: <a target='_blank' href='https://www.cdc.gov/sleep/about_sleep/how_much_sleep.html'>*CDC</a>
+      </li>
+      <li>
+        Eating healthily. The reason this is good for your mental health is because of how it affects your gastrointestinal tract. 
 
+        Eating healthily helps the increase of 'good' bacteria, which positively affects neurotransmitter production. When neurotransmitter production is in good shape, your brain receives these positive signals.
+      </li>
+      <li>
+        Exercise. Exercise reduces anxiety, depression, and negative mood and by improving self-esteem and cognitive function. It has also been found to alleviate symptoms such as low self-esteem and social withdrawal
+      </li>
+    </ul>
+  </div>
+
+  <p class='disclaimer'>*:Reference to specific commercial products, manufacturers, companies, or trademarks does not constitute its endorsement or recommendation by the U.S. Government, Department of Health and Human Services, or Centers for Disease Control and Prevention;</p>
+</div>
 {%endblock%}

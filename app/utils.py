@@ -9,20 +9,20 @@ def scrape_health_news(country: str, page: str) -> List[Dict[str, str]]:
   '''
 
     # User-Agent for browser
-    header: Dict[str, str] = {
-        'User-Agent':
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
-    }
+    header: Dict[str, str] = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36'}
 
     # Variable in Google url called 'start' determined the page. 'start=0' means page 1, 'start=10' is page 2 ect.
     search_page: int = (int(page) - 1) * 10
 
     # Gets page markup
     html_text: str = requests.get(
-        f'https://www.google.com/search?q=health+{country}&tbm=nws&start={search_page}',
+        f'https://www.google.com/search?q=Health+{country}&tbm=nws&start={search_page}',
         headers=header).text
-    soup: str = BeautifulSoup(html_text, 'lxml')
 
+
+
+    soup: str = BeautifulSoup(html_text, 'lxml')
+    
     # G-cards hold the informantion needed
     news: List[str] = soup.find_all('g-card', class_='nChh6e')
 
@@ -60,36 +60,38 @@ def scrape_health_news(country: str, page: str) -> List[Dict[str, str]]:
 
 
 def scrape_covid_information(country: str):
-  """
+    """
   Scrapes Covid statistics from Google
   """
 
-  # User-Agent for browser
-  header: Dict[str, str] = {
-    'User-Agent':
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
-  }
+    # User-Agent for browser
+    header: Dict[str, str] = {
+        'User-Agent':
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36'
+    }
 
-  # Gets page markup
-  html_text: str = requests.get(
-      'https://www.worldometers.info/coronavirus/?zarsrc=130',
-      headers=header).text
+    # Gets page markup
+    html_text: str = requests.get('https://www.worldometers.info/coronavirus/',
+                                  headers=header).text
 
-  soup: str = BeautifulSoup(html_text, 'lxml')
+    soup: str = BeautifulSoup(html_text, 'lxml')
 
-  # Tbody contains data needed
-  stats_table: List[str] = soup.find('tbody')
+    # Tbody contains data needed
+    stats_table: List[str] = soup.find('tbody')
 
-  new_soup: str = BeautifulSoup(str(stats_table), 'lxml')
+    new_soup: str = BeautifulSoup(str(stats_table), 'lxml')
 
-  # Finds the tag with the data
-  stats_html: str = new_soup.find('td', text=country).parent 
+    # Finds the tag with the data
+    stats_html: str = new_soup.find('td', text=country).parent
 
-  # Gathers the data
-  stats: List[str] = [i.text for i in stats_html.find_all('td') if not 'display:none' in str(i)][1:15]
+    # Gathers the data
+    stats: List[str] = [
+        i.text for i in stats_html.find_all('td')
+        if not 'display:none' in str(i)
+    ][1:15]
 
-  # Replaces all empty strings with '-'
-  for i in stats:
-    if not i:
-      stats[stats.index(i)] = '-'
-  return stats
+    # Replaces all empty strings with '-'
+    for i in stats:
+        if not i:
+            stats[stats.index(i)] = '-'
+    return stats
