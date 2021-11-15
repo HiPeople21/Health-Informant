@@ -11,7 +11,7 @@ Made by: HiPeople21
 
 It should work on all devices and browsers
 
-Website: [link](https://health-informant.repl.co)
+Website: [link](https://health-informant.hipeople21.repl.co)
 
 <!-- We're no strangers to love
 You know the rules and so do I
